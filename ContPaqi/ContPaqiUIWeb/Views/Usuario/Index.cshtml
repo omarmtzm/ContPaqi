@@ -1,0 +1,120 @@
+﻿@model Entity.ReturnObject;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var mensajeError = Model.message;
+    var rtnMensaje = Model.result;
+}
+
+@section scriptsCSS{
+    <!-- toastr -->
+    <link rel="stylesheet" href="~/plugin/toastr/toastr.min.css" />    
+    <!--datatables-->
+    <link rel="stylesheet" href="~/plugin/DataTables/DataTables-1.11.3/css/dataTables.bootstrap4.min.css" />
+    <!-- Personal -->
+    <link rel="stylesheet" href="~/css/Usuario/lista.css" />
+}
+
+
+    <main role="main" class="container-fluid" style="padding: 25px 15px 0;">
+        <input id="mensaje" type="hidden" value="@( mensajeError == "" ? "" : mensajeError)" />
+        <div class="container-fluid">
+            <section class="card card-outline card-info">
+                <div class="card-header">
+                    <h4 class="card-title">Lista Uusarios</h4>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+
+                        <p class="card-text">
+                            <a class="btn btn-sm  btn-success" asp-action="Create" asp-controller="Usuario" >
+                                <i class="fa fa-plus"></i>
+                                Crear nuevo
+                            </a>
+                        </p>
+
+                        <hr>
+
+                        <div class="table-responsive-sm">
+                            <table id="listaUsuarios" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario ID</th>
+                                        <th>Nombre Usuario</th>
+                                        <th>Codigo Usuario</th>
+                                        <th>Estatus</th>
+                                        <th>Correo Electronico</th>
+                                        <th>Fecha Modificacion</th>
+                                        <th>Fecha Creacion</th>
+                                        <th class="filter-false text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.detail != null)
+                                    {
+                                        foreach (var item in (List<Entity.Usuario>)Model.detail)
+                                        {
+                                            <tr>
+                                                <td>@item.UsuarioID</td>
+                                                <td>@item.NombreUsuario  </td>
+                                                <td>@item.CodigoUsuario</td>
+                                                <td>@(item.Estatus ? "TRUE" : "FALSE")</td>
+                                                <td>@item.CorreoElectronico</td>
+                                                <td>@item.FechaModificacion</td>
+                                                <td>@item.FechaCreacion</td>
+                                                <td class="text-center">
+                                                    <button id="btnEditar"
+                                                            class="btn btn-sm btn-primary"
+                                                            type="button"
+                                                            onclick="Javascript: EditaUsuario(@item.UsuarioID);
+    too
+    ">
+                                                        <i class="fa fa-pen"></i>
+                                                    </button>
+                                                    &nbsp;|&nbsp;
+                                                    <button id="btnEliminar"
+                                                            class="btn btn-sm btn-danger"
+                                                            type="button"
+                                                            onclick="javascript:EliminaUsuario(@item.UsuarioID);">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>UsuarioID</th>
+                                        <th>NombreUsuario</th>
+                                        <th>CodigoUsuario</th>
+                                        <th>Estatus</th>
+                                        <th>CorreoElectronico</th>
+                                        <th>FechaModificacion</th>
+                                        <th>FechaCreacion</th>
+                                        <th class="filter-false text-center"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                </div><!-- panel-body // -->
+            </section><!-- panel// -->
+        </div> <!-- container// -->
+
+
+    </main>
+
+
+@section scriptsJS{
+    <!-- Toastr -->
+    <script type="text/javascript" src="~/plugin/toastr/toastr.min.js"></script>
+    <!--datatables-->
+    <script type="text/javascript" src="~/plugin/DataTables/DataTables-1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/plugin/DataTables/DataTables-1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Personal -->
+    <script type="text/javascript" src="~/js/Usuario/lista.js"></script>
+}

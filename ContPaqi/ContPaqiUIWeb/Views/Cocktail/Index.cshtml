@@ -1,0 +1,85 @@
+﻿@model Entity.ReturnObject
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var mensajeError = Model.message;
+    var rtnMensaje = Model.result;
+}
+
+@section scriptsCSS{
+    <!-- toastr -->
+    <link rel="stylesheet" href="~/plugin/toastr/toastr.min.css" />
+    <!--datatables-->
+    <link rel="stylesheet" href="~/plugin/DataTables/DataTables-1.11.3/css/dataTables.bootstrap4.min.css" />
+    <!-- Personal -->
+    <link rel="stylesheet" href="~/css/Cocktail/lista.css" />
+}
+
+
+<main role="main" class="container-fluid" style="padding: 25px 15px 0;">
+    <input id="mensaje" type="hidden" value="@( mensajeError == "" ? "" : mensajeError)" />
+    <div class="container-fluid">
+        <section class="card card-outline card-info">
+            <div class="card-header">
+                <h4 class="card-title">Reporte Buscar Cóctel por nombre</h4>
+            </div>
+            
+            
+            <div class="card-body">
+                <div class="container-fluid">
+                    <form role="form" class="form-horizontal" method="post">
+                        <div class="form-group row">
+
+                            <label for="cocktail" class="form-control-sm col-sm-2 text-right"><b>Buscar cóctel por nombre</b></label>
+                            <div class="col-sm-3">
+                                <input type="text" name="txtCocktail" id="cocktail" class="form-control form-control-sm" placeholder="cocktail" tabindex="10" autofocus>
+                            </div>
+
+                            
+                            <div class="col-sm-7">
+                                <button name="searchCocktail" id="btnSearchCocktail" type="button" onclick="SearchCocktailByName()" class="btn btn-sm btn-primary" tabindex="20"><i class="fa fa-search" aria-hidden="true">&nbsp;</i>Search and Save Cocktel</button>
+                                
+                                <a href="@Url.Action("Index","Cocktail")" class="btn btn-sm btn-secondary " tabindex="30">
+                                    <i class="fa fa-refresh" aria-hidden="true">&nbsp;</i>
+                                    Clean
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">                       
+                            <div class="col-sm-2 input-group">                                
+                            </div>                    
+                            <div class="col-sm-2">                               
+                            </div>
+
+                            <div class="col-sm-4 text-right">
+                                
+                            </div>
+                        </div>
+
+                        <div id="dvCocktaildetails">                          
+                            <partial name="_DetalleCocktail" model="Model" />
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div><!-- panel-body // -->
+        </section><!-- panel// -->
+    </div> <!-- container// -->
+
+
+</main>
+
+@section scriptsJS{
+    <!-- Toastr -->
+    <script type="text/javascript" src="~/plugin/toastr/toastr.min.js"></script>
+    <!--datatables-->
+    <script type="text/javascript" src="~/plugin/DataTables/DataTables-1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/plugin/DataTables/DataTables-1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Personal -->
+    <script type="text/javascript" src="~/js/Cocktail/lista.js"></script>
+}

@@ -1,0 +1,61 @@
+﻿
+@model Entity.ReturnObject
+
+@if (Model.message=="")
+{
+    <input name="txtMensaje" id="pvMensaje" type="hidden" value="" />
+}
+else
+{
+    <input name="txtMensaje" id="pvMensaje" type="hidden" value="@Model.message" />
+    
+}
+
+<div class="table-responsive-sm">
+    <table id="listaCocktail" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Drink Thumb</th>
+                <th>Id Drink</th>
+                <th>Drink</th>
+                <th>Category</th>
+                <th>Alcoholic</th>
+                <th>Glass</th>
+                <th>Date Modified</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model.detail != null)
+            {
+                List<Entity.DTO.TablaCocktail> listaCocktail = (List<Entity.DTO.TablaCocktail>)Model.detail;
+                foreach (var item in listaCocktail)
+                {
+                    <tr>
+                        <td><img src="@item.strDrinkThumb" alt="MDN" style="width: 50px;height: 50px;"></td>
+                        <td>@item.idDrink</td>
+                        <td>@item.strDrink</td>
+                        <td>@item.strCategory</td>
+                        <td>@item.strAlcoholic</td>
+                        <td>@item.strGlass</td>
+                        <td>@item.dateModified</td>
+
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Id Drink</th>
+                <th>Drink</th>
+                <th>Category</th>
+                <th>Alcoholic</th>
+                <th>Glass</th>
+                <th>Date Modified</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

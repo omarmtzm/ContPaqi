@@ -1,0 +1,102 @@
+﻿@model Entity.ReturnObject
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+
+    var mensajeError = Model.message;
+    var rtnMensaje = Model.result;
+}
+
+@section scriptsCSS{
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/plugin/toastr/toastr.min.css" />
+}
+
+<main role="main" class="container-fluid" style="padding: 25px 15px 0;">
+    <input id="mensaje" type="hidden" value="@(rtnMensaje ? "" : mensajeError)" />
+    <div class="container-fluid">
+        <section class="card card-outline card-info ">
+            <div class="card-header">
+                <h4 class="card-title">Crea Usuario</h4>
+            </div>
+
+            <form role="form" id="creaUsuario" name="frmCreaUsuario" class="form-group" method="post" style=" margin-bottom: 0px;">
+                <div class="card-body">
+                    <div class="container-fluid">
+
+                        <div class="form-group row">
+                            <label class="col-sm-2" for="usuarioID">Usuario ID</label>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm" id="usuarioID" name="txtUsuarioID" placeholder="Usuario ID" type="text" disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2" for="nombreUsuario">Nombre Usuario</label>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm" id="nombreUsuario" name="txtNombreUsuario" placeholder="Nombre Usuario" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2" for="codigoUsuario">Codigo Usuario</label>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm" id="codigoUsuario" name="txtCodigoUsuario" placeholder="codigo Usuario" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2" for="password">Password</label>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm" id="password" name="txtPassword" placeholder="Password" type="password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                           
+                                <label class="col-sm-2" for="estatus">Estatus</label>
+                           
+                            <div class="col-sm-2">
+                                <div class=" custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="estatus" name="cbxEstatus">
+                                    <label class="custom-control-label" for="estatus"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2" for="correoElectronico">Correo Electronico</label>
+                            <div class="col-sm-5">
+                                <input class="form-control form-control-sm" id="correoElectronico" name="txtCorreoElectronico" placeholder="Correo Electronico" type="email">
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- panel-body // -->
+
+                <div class="card-footer ">
+                    <div class="row">
+                        <div class="col-3 ">
+                            <button name="btnCreaUsuario" type="button" class="btn btn-success" onclick="Javascript:CreaUsuario()"><i class="fa fa-save"></i> Guardar</button>
+                        </div>
+                        <div class="col-3 ">
+                            <a class="btn btn-primary float-right" asp-action="Index" asp-controller="Usuario"> <i class="fa fa-arrow-left"></i> Volver a la lista </a>
+                        </div>
+                    </div>
+                </div><!-- panel-footer // -->
+            </form>
+        </section><!-- panel// -->
+    </div> <!-- container// -->
+</main>
+
+
+@section scriptsJS{
+    <!-- Toastr -->
+    <script type="text/javascript" src="~/plugin/toastr/toastr.min.js"></script>   
+    <!-- Personal -->
+    <script type="text/javascript" src="~/js/Usuario/crear.js"></script>
+}
+
+
+
