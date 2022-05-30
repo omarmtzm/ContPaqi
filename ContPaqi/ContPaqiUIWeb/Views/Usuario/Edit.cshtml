@@ -12,6 +12,7 @@
 @section scriptsCSS{
     <!-- Toastr -->
     <link rel="stylesheet" href="~/plugin/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/css/Usuario/editar.css"  /> 
 }
 
 <main role="main" class="container-fluid" style="padding: 25px 15px 0;">
@@ -51,8 +52,11 @@
 
                         <div class="form-group row">
                             <label class="col-sm-2" for="password">Password</label>
-                            <div class="col-sm-5">
+                            <div class="input-group col-sm-5">
                                 <input class="form-control form-control-sm" id="password" name="txtPassword" placeholder="Password" value="@usuario.Password" type="password">
+                                <div class="input-group-sm">
+                                    <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                                </div>
                             </div>
                         </div>
 
