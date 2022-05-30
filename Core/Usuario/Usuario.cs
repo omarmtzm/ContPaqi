@@ -31,7 +31,8 @@ namespace Core.Usuario
                 DAO.Usuarios dataUsuario = new DAO.Usuarios(conexion);
 
                 // Es esta parte encripta la contraseña este es de un solo camino
-                usuario.Password = Seguridad.EncryptGetSHA256(usuario.Password);
+                usuario.Password = Seguridad.Encrypt(usuario.Password, true);
+
 
                 /*Valida los campos obligatorios*/
                 if (usuario.NombreUsuario == "")
@@ -101,7 +102,7 @@ namespace Core.Usuario
                 usuario.NombreUsuario = creUsuario.NombreUsuario;
                 usuario.CodigoUsuario = creUsuario.CodigoUsuario;
                 // Es esta parte encripta la contraseña este es de un solo camino
-                usuario.Password = Seguridad.EncryptGetSHA256(creUsuario.Password); 
+                usuario.Password = Seguridad.Encrypt(creUsuario.Password, true); 
                 usuario.Estatus =  creUsuario.Estatus;
                 usuario.CorreoElectronico = creUsuario.CorreoElectronico;
 
@@ -242,6 +243,8 @@ namespace Core.Usuario
                 Entity.Usuario usuario = new Entity.Usuario();
 
                 usuario = dataUsuario.GetByID(id);
+
+                usuario.Password = Seguridad.Decrypt(usuario.Password, true);
 
                 if (usuario != null)
                 {
